@@ -67,14 +67,16 @@ public class TestCharacterChoice extends Application {
         imageViewDybala.setFitHeight(250);
         imageViewDybala.setFitWidth(200);
         Label labelDybala = new Label("Paulo Dybala");
+        Button dybalaButton= new Button("",imageViewDybala);
         labelDybala.setPadding(new Insets(15,0,0,0));
-        VBox DybalaVbox = new VBox(imageViewDybala, labelDybala);
+        VBox DybalaVbox = new VBox(dybalaButton, labelDybala);
         labelDybala.setFont(new Font("Arial", 22));
 
         spidermanVbox.setAlignment(Pos.CENTER);
         DeligtVbox.setAlignment(Pos.CENTER);
         LightskinVbox.setAlignment(Pos.CENTER);
         DybalaVbox.setAlignment(Pos.CENTER);
+
 
 
         HBox characterHBox = new HBox(DeligtVbox, spidermanVbox, DybalaVbox, LightskinVbox);
