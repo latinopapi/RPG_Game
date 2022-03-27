@@ -5,62 +5,23 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 
 import java.io.FileInputStream;
 
-public class GamePanel extends Application {
+public class TestCharacterChoice extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("*game title*");
-
-
-        Label welcomeLabel = new Label("Welcome to *game title*");
-        welcomeLabel.setFont(new Font("Ubuntu",25));
-
-        Button startGameButton= new Button("Start Game");
-        Font startGameButtonFont = Font.font("Arial Rounded MT Bold", 20);
-        startGameButton.setFont(startGameButtonFont);
-
-        FileInputStream input = new FileInputStream("src/images/baby_on_babydababy_cover.jpg");
-        Image image = new Image(input);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(400);
-        VBox welcomeVbox= new VBox(welcomeLabel,imageView,startGameButton);
-        welcomeVbox.setSpacing(20);
-        welcomeVbox.setAlignment(Pos.CENTER);
-        StackPane pane = new StackPane(welcomeVbox);
-        Scene welcomeScene = new Scene(pane, 700, 500);
-        primaryStage.setResizable(false);
-        primaryStage.setScene(welcomeScene);
-
-
-
-       /* Label scene2Label= new Label("Yeah Yeah");
-        scene2Label.setFont(new Font("Chiller",35));
-        Button backToStartPageButton= new Button("Back to StartPage");
-        VBox scene2vbox= new VBox(scene2Label,backToStartPageButton);
-        scene2vbox.setAlignment(Pos.CENTER);
-        scene2vbox.setSpacing(30);
-        StackPane scene2Pane = new StackPane(scene2vbox);
-        Scene scene2 = new Scene(scene2Pane,1050,750);
-        Button backToStartPageButton= new Button("Back to StartPage");
-        backToStartPageButton.setOnAction(event -> primaryStage.setScene(welcomeScene));
-
-*/
-
-
-
 
         FileInputStream inputSpiderman = new FileInputStream("src/images/Spider-Man_(Earth-1048_version).png");
         FileInputStream inputLightskin = new FileInputStream("src/images/lightskin.jpg");
@@ -115,24 +76,18 @@ public class GamePanel extends Application {
         LightskinVbox.setAlignment(Pos.CENTER);
         DybalaVbox.setAlignment(Pos.CENTER);
 
-        Button backToStartPageButton= new Button("Back to StartPage");
-        HBox backtoStartPageButtonHbox= new HBox(backToStartPageButton);
-        backtoStartPageButtonHbox.setPadding(new Insets(550,0,0,0));
-        backToStartPageButton.setFont(new Font("Ubuntu",20));
-        backtoStartPageButtonHbox.setAlignment(Pos.CENTER);
 
         HBox characterHBox = new HBox(DeligtVbox, spidermanVbox, DybalaVbox, LightskinVbox);
         characterHBox.setSpacing(20);
         characterHBox.setAlignment(Pos.CENTER);
-        StackPane secondepane = new StackPane(chooseCharacterLabelHbox, characterHBox,backtoStartPageButtonHbox);
-        Scene chooseCharacterScene = new Scene(secondepane, 1050, 700);
+        StackPane pane = new StackPane(chooseCharacterLabelHbox, characterHBox);
+        Scene welcomeScene = new Scene(pane, 1050, 700);
+        primaryStage.setResizable(false);
+        primaryStage.setScene(welcomeScene);
 
-        backToStartPageButton.setOnAction(event -> primaryStage.setScene(welcomeScene));
-        startGameButton.setOnAction(event -> primaryStage.setScene(chooseCharacterScene));
 
         primaryStage.show();
 
+
     }
-
-
 }
