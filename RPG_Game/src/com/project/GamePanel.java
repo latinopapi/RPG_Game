@@ -115,6 +115,7 @@ public class GamePanel extends Application {
         backToStartPageButton.setOnAction(event -> primaryStage.setScene(welcomeScene));
         startGameButton.setOnAction(event -> primaryStage.setScene(chooseCharacterScene));
 
+
         primaryStage.show();
 
     }
