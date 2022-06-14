@@ -66,11 +66,6 @@ public class Character {
 
     @Override
     public String toString() {
-        return "Character{" +
-                "username='" + username + ' ' +
-                ", image='" + image + ' ' +
-                ", faehigkeit='" + faehigkeit + ' ' +
-                ", isGay=" + isGay +
-                '}';
+        return "Character{" + "username='" + username + ' ' + ", image='" + image + ' ' + ", faehigkeit='" + faehigkeit + ' ' + ", isGay=" + isGay + '}';
     }
 }

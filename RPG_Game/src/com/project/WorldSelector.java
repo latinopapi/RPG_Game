@@ -49,7 +49,7 @@ public class WorldSelector extends Application {
         World2Button.setLayoutX(290);
         World2Button.setLayoutY(185);
 
-        BetterButton World3Button = new BetterButton("World 3");
+        BetterButton World3Button = new BetterButton("Quiz");
         World3Button.setPrefWidth(260);
         World3Button.setPrefHeight(65);
         World3Button.setLayoutX(290);
@@ -67,23 +67,24 @@ public class WorldSelector extends Application {
             AtomicBoolean Story1ButtonClicked= new AtomicBoolean(false);
             Stage story1Stage = new Stage();
             AnchorPane story1Pane = new AnchorPane();
+            story1Pane.setStyle("-fx-background-color: #5ec08d");
             Scene story1Scene = new Scene(story1Pane);
             Text text = new Text("There once was a lightskin called Nabil. He really wanted to say the n-word so he asked his black friends if they can give him the n-word pass." + " " +
                     "But his friends said no. So he decided to go on a adventure to find a darkskin who would give him the n-word pass...");
-            text.setFont(new Font(World1Button.getFont().toString(),12));
-
+            text.setStyle("-fx-font-family: 'Gill Sans MT';-fx-background-color: white;-fx-font-size: 34px;");
             text.setWrappingWidth(470);
-            text.setX(5);
-            text.setY(20);
+            text.setX(160);
+            text.setY(90);
+
             BetterButton story1Button = new BetterButton("Continue...");
-            story1Button.setLayoutY(500);
-            story1Button.setLayoutX(100);
+            story1Button.setLayoutY(400);
+            story1Button.setLayoutX(230);
 
             story1Pane.getChildren().add(text);
             story1Pane.getChildren().add(story1Button);
 
-            story1Stage.setWidth(500);
-            story1Stage.setHeight(700);
+            story1Stage.setWidth(800);
+            story1Stage.setHeight(600);
             story1Stage.setResizable(false);
 
             story1Stage.setScene(story1Scene);
@@ -98,9 +99,12 @@ public class WorldSelector extends Application {
                     }
                 }
                 else text.setText("So his adventure has begun...");
+                text.setStyle("-fx-font-family: 'MS Gothic'; -fx-font-size: 40px");
+                text.setX(180);
+                text.setY(190);
                 Story1ButtonClicked.set(true);
                 story1Button.setText("Start they journey!");
-                story1Button.setLayoutX(50);
+
             });
 
         });
@@ -108,12 +112,16 @@ public class WorldSelector extends Application {
 
         World2Button.setOnAction(event -> {
             if (!(world1.isBossDefeated())) {
+
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setContentText("World 2 not unlocked yet! Defeat the boss in World 1 to unlock World 2!");
                 a.show();
             } else {
                 try {
+
                     world2.start(stage);
+                    stage.setX(100);
+                    stage.setY(10);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
@@ -123,11 +131,11 @@ public class WorldSelector extends Application {
         });
 
         World3Button.setOnAction(event -> {
-            if (!(world2.isBossDefeated())) {
+            if (!(world1.isBossDefeated() && world2.isBossDefeated())) {
                 Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("World 3 not unlocked yet! Defeat the boss in World 2 to unlock World 2!");
+                a.setContentText("Quiz not unlocked yet! Defeat the boss in World 1 and complete World 2 to unlock Quiz!");
                 a.show();
-            } else {
+            } else if(world1.isBossDefeated() && world2.isBossDefeated()) {
                 try {
                     world3.start(stage);
                 } catch (FileNotFoundException e) {
@@ -137,6 +145,8 @@ public class WorldSelector extends Application {
                 }
             }
         });
+
+
 
         mainPane.getChildren().add(World1Button);
         mainPane.getChildren().add(World2Button);
@@ -152,4 +162,3 @@ public class WorldSelector extends Application {
 
     }
 }
-

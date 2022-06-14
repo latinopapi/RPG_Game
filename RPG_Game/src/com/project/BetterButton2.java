@@ -10,12 +10,12 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 
-public class BetterButton extends Button {
+public class BetterButton2 extends Button {
     private static final String BUTTON_PRESSED_STYLE = "-fx-background-color: white; -fx-background-image: url('src/images/Button.png');";
     private static final String BUTTON_FREE_STYLE = "-fx-background-color: white; -fx-background-image: url('src/images/Button.png');";
-    private static final String FONT_PATH = "src/ressources/FortniteFont.otf";
+    private static final String FONT_PATH = "src/ressources/sanfrancisco.otf";
 
-    public BetterButton(String text) {
+    public BetterButton2(String text) {
         setText(text);
         setButtonFont();
         ButtonListeners();

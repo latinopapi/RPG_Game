@@ -27,7 +27,6 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import static com.project.GamePanel.selectedCharacter;
 
@@ -56,6 +55,12 @@ public class World1 extends Application {
     private Sprite boss;
     private Sprite backgroundSprite;
     private Sprite shopKeeper;
+
+    private Sprite shoplabel;
+    private Sprite bosslabel;
+    private Sprite monsterlabel;
+    private Sprite mosterLabel2;
+
 
     // Monster 1 Nodes
     private Scene monster1Scene;
@@ -131,47 +136,73 @@ public class World1 extends Application {
         double random;
         double formattedrandom;
         ArrayList<Double> randomNumbers = new ArrayList<>();
-        for (int n = 0; n < 10; n++) {
-            random = (Math.random() * 0.4 + 0.001);
-            formattedrandom = (Math.floor(random * 1000) / 1000);
-            randomNumbers.add(formattedrandom);
+
+        for (int n = 0; n <= 40; n++) {
+            double i = 0.05 * n;
+            double x = round(i, 2);
+            randomNumbers.add(x);
+            System.out.println(randomNumbers.get(n));
         }
+
+
+//        randomNumbers.add(0.04);
+//        randomNumbers.add(0.1);
+//        randomNumbers.add(0.13);
+//        randomNumbers.add(0.18);
+//        randomNumbers.add(0.22);
+//        randomNumbers.add(0.25);
+//        randomNumbers.add(0.28);
+//        randomNumbers.add(0.32);
+//        randomNumbers.add(0.35);
+//        randomNumbers.add(0.39);
+//        randomNumbers.add(0.45);
+//        randomNumbers.add(0.54);
+//        randomNumbers.add(0.58);
+//        randomNumbers.add(0.63);
+//        randomNumbers.add(0.65);
+//        randomNumbers.add(0.7);
+//        randomNumbers.add(0.75);
+//        randomNumbers.add(0.83);
+//        randomNumbers.add(0.9);
+//        randomNumbers.add(0.95);
+
+
         Collections.sort(randomNumbers);
         for (Double d : randomNumbers) {
             System.out.println(d);
         }
+
         System.out.println("ENDE ARRAYLIST RANDOM NUMBERS");
         Image myimglightskin = new Image("images/lightskin.jpg");
         ImageView myimgviewlightskin = new ImageView(myimglightskin);
-        Image myimgtravis = new Image("images/travis.jpg");
-        ImageView myimgviewtravis = new ImageView(myimgtravis);
-        Image myimgfortnite = new Image("images/fortnite.jpg");
-        ImageView myimgviewfortnite = new ImageView(myimgfortnite);
-        Image batman = new Image("images/batman.png");
-        ImageView myimgviewbatman = new ImageView(batman);
 
+        Image imageducahn = new Image("images/ducahn.jpg");
+        ImageView imgviewducahn = new ImageView(imageducahn);
+
+
+        Image myimgtravis = new Image("images/jumpscare5#.jpg");
+        ImageView myimgviewtravis = new ImageView(myimgtravis);
+        Image batman = new Image("images/jumpscares4.jpg");
+        ImageView myimgviewbatman = new ImageView(batman);
+        Image imageducahn2 = new Image("images/ducahn.jpg");
+        ImageView imgviewducahn2 = new ImageView(imageducahn2);
         Image myimgjumpscare1 = new Image("images/jumpscares1.jpg");
         ImageView myimgviewjumpscare1 = new ImageView(myimgjumpscare1);
         Image myimgjumpscare2 = new Image("images/jumpscares2.jpg");
         ImageView myimgviewjumpscare2 = new ImageView(myimgjumpscare2);
-        Image myimgjumpscare3 = new Image("images/jumpscares3.gif");
-        ImageView myimgviewjumpscare3 = new ImageView(myimgjumpscare3);
-        myimgviewjumpscare3.setFitWidth(500);
-
-
         imgviewjumpscares = new ArrayList<>();
-        for (int i = 0; i <= 100; i++) {
+
+        for (int i = 0; i < 5; i++) {
             imgviewjumpscares.add(myimgviewjumpscare1);
+            imgviewjumpscares.add(imgviewducahn);
             imgviewjumpscares.add(myimgviewlightskin);
             imgviewjumpscares.add(myimgviewtravis);
-            imgviewjumpscares.add(myimgviewfortnite);
+            imgviewjumpscares.add(imgviewducahn2);
             imgviewjumpscares.add(myimgviewjumpscare2);
             imgviewjumpscares.add(myimgviewbatman);
-            imgviewjumpscares.add(myimgviewjumpscare3);
-
         }
-        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
+        canvas.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 gameStarted = !gameStarted;
@@ -179,8 +210,11 @@ public class World1 extends Application {
                     frameCount = 0;
                 }
                 if (event.getSceneX() <= 100 && event.getSceneY() <= 29) {
+                    primaryStage.close();
+                    timeline.stop();
                     WorldSelector worldSelector = new WorldSelector();
                     try {
+
                         worldSelector.start(primaryStage);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -195,6 +229,10 @@ public class World1 extends Application {
                 if (gameStarted) {
                     if (event.getCode() == KeyCode.P) {
                         coins += 999999;
+                    }
+                    if (event.getCode() == KeyCode.R) {
+                        primaryStage.setX(450);
+                        primaryStage.setY(50);
                     }
 
                     if (timeline != null) {
@@ -245,17 +283,13 @@ public class World1 extends Application {
                                                 primaryStage.setX(primaryStage.getX() - 100);
                                                 primaryStage.setY(primaryStage.getY() - 100);
                                             }
-                                            if (timeSeconds.getValue().equals(randomNumbers.get(i) + 0.01)) {  //die differenz zwischen den random numbers muss größer als 0.02 sein!
-                                                try {
-                                                    TimeUnit.SECONDS.sleep(3);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
+                                            if (timeSeconds.getValue() > (randomNumbers.get(i) + 0.01)) {  //die differenz zwischen den random numbers muss größer als 0.02 sein!
                                                 pane.getChildren().remove(imgviewjumpscares.get(i));
                                                 primaryStage.setX(primaryStage.getX() + 100);
-                                                primaryStage.setY(primaryStage.getY() + 00);
+                                                primaryStage.setY(primaryStage.getY() + 50);
                                                 i++;
                                             }
+
                                         })
                         );
                         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -349,21 +383,35 @@ public class World1 extends Application {
 
         monster1 = new Sprite();
         monster1.setPosition(GAME_HEIGHT - 50, GAME_WIDTH / 2);
-        monster1.setImage("src/images/World1_Slime.png");
-
+        monster1.setImage("src/images/kumalala.jpg");
+        mosterLabel2 = new Sprite();
+        mosterLabel2.setPosition(GAME_HEIGHT - 40, GAME_WIDTH / 2 + 150);
+        mosterLabel2.setImage("src/images/monster.jpg");
 
         monster2 = new Sprite();
         monster2.setPosition(GAME_WIDTH - 650, GAME_HEIGHT / 3);
-        monster2.setImage("src/images/World1_Slime2.png");
+        monster2.setImage("src/images/savesta.jpg");
+        monsterlabel = new Sprite();
+        monsterlabel.setImage("src/images/monster.jpg");
+        monsterlabel.setPosition(GAME_WIDTH - 650, GAME_HEIGHT / 3 + 110);
 
 
         boss = new Sprite();
-        boss.setPosition(GAME_WIDTH - 100, GAME_HEIGHT / 2 - 50);
-        boss.setImage("src/images/World1_Boss.png");
+        boss.setPosition(GAME_WIDTH - 250, GAME_HEIGHT / 2 - 200);
+        boss.setImage("src/images/kanye.jpg");
+        bosslabel = new Sprite();
+        bosslabel.setImage("src/images/boss.jpg");
+        bosslabel.setPosition(GAME_WIDTH - 230, GAME_HEIGHT / 2 - 10);
+        //private Sprite bosslabel;
+        //private Sprite monsterlabel;
 
         shopKeeper = new Sprite();
         shopKeeper.setPosition(GAME_WIDTH / 2 - 50, 20);
-        shopKeeper.setImage("src/images/World1ShopKeeper.png");
+        shopKeeper.setImage("src/images/amer.jpg");
+        shoplabel = new Sprite();
+        shoplabel.setImage("src/images/shopman.jpg");
+        shoplabel.setPosition(GAME_WIDTH / 2 - 50, 130);
+
 
         backgroundSprite = new Sprite();
         backgroundSprite.setPosition(0, 0);
@@ -371,7 +419,7 @@ public class World1 extends Application {
 
         backButtonSprite = new Sprite();
         backButtonSprite.setPosition(0, 0);
-        backButtonSprite.setImage("src/images/Button.png");
+        backButtonSprite.setImage("src/images/backbutton.jpg");
 
         tl.play();
 
@@ -398,7 +446,7 @@ public class World1 extends Application {
         gc.setFont(Font.font(25));
         gc.setTextAlign(TextAlignment.CENTER);
         if (!gameStarted) {
-            gc.fillText("Click to Start" + "\n" + "Press E near an enemy to challenge him!", GAME_WIDTH / 2, GAME_HEIGHT / 2);
+            gc.fillText("Click to Start", GAME_WIDTH / 2, GAME_HEIGHT / 2);
         }
 
         hero.render(gc);
@@ -406,6 +454,12 @@ public class World1 extends Application {
         monster2.render(gc);
         boss.render(gc);
         shopKeeper.render(gc);
+        shoplabel.render(gc);
+        bosslabel.render(gc);
+        monsterlabel.render(gc);
+        mosterLabel2.render(gc);
+
+
     }
 
 
@@ -434,6 +488,7 @@ public class World1 extends Application {
         //Create Nodes
         monster1Stage = new Stage();
         monster1Pane = new AnchorPane();
+
 
         //Buttons
         monster1BackButton = new Button("Back");
@@ -784,9 +839,12 @@ public class World1 extends Application {
         });
 
         monster2HelpButton.setOnAction(event -> {
-            monster2Text.setText("If you use more mana than you have, you lose the game" +
+            Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+            infoAlert.setContentText("If you use more mana than you have, you lose the game" +
                     "\n" + "A normal Attack deals" + " " + attackDamage + " " + "damage and costs 10 mana" +
                     "\n" + "The special Attack deals" + " " + specialAttackDamage + " " + "damage and costs 25 mana");
+            infoAlert.show();
+
         });
 
 
@@ -1129,6 +1187,11 @@ public class World1 extends Application {
     public void setBossSpecialAttackUsed(boolean value) {
         this.bossSpecialAttackUsed = value;
 
+    }
+
+    private static double round(double value, int decimalPoints) {
+        double d = Math.pow(10, decimalPoints);
+        return Math.round(value * d) / d;
     }
 }
 

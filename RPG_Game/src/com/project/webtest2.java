@@ -1,7 +1,5 @@
 package com.project;
-
 import static com.project.GamePanel.selectedCharacter;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -24,15 +22,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-public class World2 extends Application {
-    private String selectedCharacterImageURL = selectedCharacter.getImage();
+public class webtest2 extends Application {
+    private String selectedCharacterImageURL = "src/images/yakub.jpg";
     private static final int WIDTH = 1200;
     private static final int HEIGHT = 800;
 
@@ -69,7 +64,6 @@ public class World2 extends Application {
 
         primaryStage.setTitle("World 2");
         primaryStage.setResizable(false);
-        writeFile1();
 
 
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
@@ -81,13 +75,7 @@ public class World2 extends Application {
 
         Scene scene = new Scene(pane);
 
-        Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e -> {
-            try {
-                run(gc);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }));
+        Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e -> run(gc)));
         tl.setCycleCount(Timeline.INDEFINITE);
 
         canvas.setOnMouseClicked(e -> {
@@ -165,7 +153,7 @@ public class World2 extends Application {
 
                 if (character.getPositionX() < 100 && character.getPositionY() == 700) {
                     try {
-                        BossDefeated = true;
+                        BossDefeated=true;
                         primaryStage.close();
                         WorldSelector worldSelector = new WorldSelector();
                         worldSelector.start(primaryStage);
@@ -255,7 +243,7 @@ public class World2 extends Application {
 
                 }
 
-                if (timeSeconds.getValue() % 25 == 0) {
+                if (timeSeconds.getValue() % 15 == 0) {
                     if (LabyrinthVerschoben) {
                         LabyrinthZurückschiebenBitte = true;
                     } else if (!LabyrinthVerschoben) {
@@ -266,33 +254,28 @@ public class World2 extends Application {
                 //Rand
                 if (!LabyrinthVerschoben) {
                     if (character.getPositionY() < 100 || character.getPositionX() > 1000 || character.getPositionY() > 700 || character.getPositionX() < 0) {
-                        System.err.println("Game Over");
-                        character.setPosition(0, 100);
+                        System.err.println("Game Over");        character.setPosition(0, 100);
                     }
                     //Spalte Links
                     if (character.getPositionX() >= 0 && character.getPositionX() < 100 && character.getPositionY() > 100 && character.getPositionY() < 700) {
-                        System.err.println("Game Over");
-                        character.setPosition(0, 100);
+                        System.err.println("Game Over");        character.setPosition(0, 100);
                     }
                     //Reihe 2
                     if (character.getPositionX() >= 100 && character.getPositionX() < 1000 && character.getPositionY() > 100 & character.getPositionY() < 300) {
-                        System.err.println("Game Over");
-                        character.setPosition(0, 100);
+                        System.err.println("Game Over");        character.setPosition(0, 100);
                     }
 
                     //reihe 3
                     if (character.getPositionX() > 100 && character.getPositionY() > 300 && character.getPositionY() < 500) {
-                        System.err.println("Game Over");
-                        character.setPosition(0, 100);
+                        System.err.println("Game Over");        character.setPosition(0, 100);
                     }
                     //Reihe 4
                     if (character.getPositionX() >= 0 && character.getPositionX() < 1000 && character.getPositionY() > 500 && character.getPositionY() < 700) {
-                        System.err.println("Game Over");
-                        character.setPosition(0, 100);
+                        System.err.println("Game Over");        character.setPosition(0, 100);
                     }
                 }
             }
-            if (LabyrinthVerschoben) {
+            if(LabyrinthVerschoben){
                 //Rand
                 if (character.getPositionY() < 100 || character.getPositionX() > 1000 || character.getPositionY() > 700 || character.getPositionX() < 0) {
                     System.err.println("Game Over");
@@ -323,7 +306,7 @@ public class World2 extends Application {
         });
 
         character = new Sprite();
-        character.setImage(selectedCharacterImageURL);
+        character.setImage("src/images/yakub.jpg");
         character.setPosition(0, 100);
 
 
@@ -356,7 +339,7 @@ public class World2 extends Application {
         tl.play();
     }
 
-    private void run(GraphicsContext gc) throws IOException {
+    private void run(GraphicsContext gc) {
 
 
         // Bewegung von Sprites / Logik
@@ -409,120 +392,6 @@ public class World2 extends Application {
 
     public boolean isBossDefeated() {
         return this.BossDefeated;
-    }
-
-    public void writeFile1() throws IOException {
-
-        String name = "certificate_original.html";
-
-        try (PrintWriter out = new PrintWriter(new FileWriter(name, true))) {
-
-            String htmltemplate = "<!DOCTYPE html>\n" +
-                    "<html lang=\"de\">\n" +
-                    "  <head>\n" +
-                    "    <meta charset=\"UTF-8\" />\n" +
-                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n" +
-                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n" +
-                    "    <title>Document</title>\n" +
-                    "    <link\n" +
-                    "      href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@500;600&family=Poppins:wght@500&display=swap\"\n" +
-                    "      rel=\"stylesheet\"\n" +
-                    "    />\n" +
-                    "    <link\n" +
-                    "      href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\"\n" +
-                    "      rel=\"stylesheet\"\n" +
-                    "      integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\"\n" +
-                    "      crossorigin=\"anonymous\"\n" +
-                    "    />\n" +
-                    "    <style>\n" +
-                    "      .zertifikattitle {\n" +
-                    "        font-family: \"Inter\";\n" +
-                    "        font-size: 50px;\n" +
-                    "        font-weight: bold;\n" +
-                    "      }\n" +
-                    "\n" +
-                    "      body,\n" +
-                    "      html {\n" +
-                    "        margin: 0;\n" +
-                    "        padding: 0;\n" +
-                    "      }\n" +
-                    "      body {\n" +
-                    "        color: black;\n" +
-                    "        display: table;\n" +
-                    "        font-family: Georgia, serif;\n" +
-                    "        font-size: 24px;\n" +
-                    "        text-align: center;\n" +
-                    "      }\n" +
-                    "      .container {\n" +
-                    "        border: 20px solid tan;\n" +
-                    "        width: 750px;\n" +
-                    "        height: 563px;\n" +
-                    "        display: table-cell;\n" +
-                    "        vertical-align: middle;\n" +
-                    "      }\n" +
-                    "      .logo {\n" +
-                    "        color: tan;\n" +
-                    "      }\n" +
-                    "\n" +
-                    "      .marquee {\n" +
-                    "        color: tan;\n" +
-                    "        font-size: 48px;\n" +
-                    "        margin: 20px;\n" +
-                    "      }\n" +
-                    "      .assignment {\n" +
-                    "        margin: 20px;\n" +
-                    "      }\n" +
-                    "      .person {\n" +
-                    "        border-bottom: 2px solid black;\n" +
-                    "        font-size: 32px;\n" +
-                    "        font-style: italic;\n" +
-                    "        margin: 20px auto;\n" +
-                    "        width: 400px;\n" +
-                    "      }\n" +
-                    "      .reason {\n" +
-                    "        margin: 20px;\n" +
-                    "      }\n" +
-                    "    </style>\n" +
-                    "  </head>\n" +
-                    "  <body>\n" +
-                    "   \n" +
-                    "    <div class=\"justify-content-center\">\n" +
-                    "      <div class=\"container \">\n" +
-                    "        <div class=\"logo\">from the developers of the adventure game (nabil, simon k)</div>\n" +
-                    "        <div class=\"marquee\">Certificate of Completion</div>\n" +
-                    "        <div class=\"assignment\">This n-word pass certificate is proudly presented to</div>\n" +
-                    "        <img\n" +
-                    "        src=\"" + selectedCharacterImageURL + "\"\n" +
-                    "        width=\"120px\"\n" +
-                    "        class=\"img-fluid justify-content-center\"\n" +
-                    "        alt=\"picture\"\n" +
-                    "      />\n" +
-                    "        <div class=\"person\">" + selectedCharacter.getUsername() + "</div>\n" +
-                    "        <div class=\"reason\">\n" +
-                    "          For mastering this outrageous and great game<br />\n" +
-                    "        </div>\n" +
-                    "      </div>\n" +
-                    "    </div>\n" +
-                    "  </body>\n" +
-                    "  <script\n" +
-                    "    src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js\"\n" +
-                    "    integrity=\"sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM\"\n" +
-                    "    crossorigin=\"anonymous\"\n" +
-                    "  ></script>\n" +
-                    "  <script\n" +
-                    "    src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js\"\n" +
-                    "    integrity=\"sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p\"\n" +
-                    "    crossorigin=\"anonymous\"\n" +
-                    "  ></script>\n" +
-                    "  <script\n" +
-                    "    src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js\"\n" +
-                    "    integrity=\"sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF\"\n" +
-                    "    crossorigin=\"anonymous\"\n" +
-                    "  ></script>\n" +
-                    "</html>\n";
-            out.print(htmltemplate);
-
-        }
     }
 }
 

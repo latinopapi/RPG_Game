@@ -23,7 +23,7 @@ public class ScenesTesten extends Application {
         Button secondarySceneButton = new Button("Return to Scene 1, x should be 20");
         secondarySceneButton.setId("title");
 
-        Font dfont = Font.loadFont("C:\\Users\\nabil\\OneDrive\\RPG_GAME\\RPG_GAME_2022-05-17\\src\\ressources\\fortnite.otf", 10);
+        Font dfont = Font.loadFont("C:\\Users\\nabil\\OneDrive\\RPG_GAME\\RPG_GAME_2022-05-17\\src\\ressources\\FortniteFont.otf", 10);
         textField.setFont(dfont);
         AnchorPane secondaryPane = new AnchorPane();
         secondaryPane.getChildren().add(secondarySceneButton);
